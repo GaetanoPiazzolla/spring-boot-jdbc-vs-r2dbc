@@ -1,0 +1,363 @@
+{
+	"info": {
+		"_postman_id": "b41c4680-2078-4174-990d-3a6aeb58b6d2",
+		"name": "Performance - Nodejs VS SpringBoot",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "spring",
+			"item": [
+				{
+					"name": "spring-login",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjEyMTA2NDYzLCJleHAiOjE2MTIxMDgyNjN9.crfgrcDKshkYtAEqvOx0juyMtnK5WvpsCu4c2uH8rAM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\" : \"username\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/spring/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"spring",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "spring-getBooks",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ0YSIsInN1YiI6InRhIiwidXNlcm5hbWUiOiJ1c2VybmFtZSIsImlhdCI6MTYxMzM5NTk0MiwiZXhwIjoxNjEzMzk3NzQyfQ.ZLQbXyC3X4t3BT9wa5vlS334dGUGRyQNm3a0KuTD-bs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/spring/books/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"spring",
+								"books",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "spring-getBook",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ0YSIsInN1YiI6InRhIiwidXNlcm5hbWUiOiJ1c2VybmFtZSIsImlhdCI6MTYxMzM5NTk0MiwiZXhwIjoxNjEzMzk3NzQyfQ.ZLQbXyC3X4t3BT9wa5vlS334dGUGRyQNm3a0KuTD-bs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/spring/books/12345678920",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"spring",
+								"books",
+								"12345678920"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "spring-postBook",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ0YSIsInN1YiI6InRhIiwidXNlcm5hbWUiOiJ1c2VybmFtZSIsImlhdCI6MTYxMzM5NTk0MiwiZXhwIjoxNjEzMzk3NzQyfQ.ZLQbXyC3X4t3BT9wa5vlS334dGUGRyQNm3a0KuTD-bs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"ciaobello\",\n    \"author\": \"tanino\",\n    \"isbn\": \"12345678920\",\n    \"year\" : \"2000\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/spring/books/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"spring",
+								"books",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "spring-cpuIntensive",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ0YSIsInN1YiI6InRhIiwidXNlcm5hbWUiOiJ1c2VybmFtZSIsImlhdCI6MTYxMzM5NTk0MiwiZXhwIjoxNjEzMzk3NzQyfQ.ZLQbXyC3X4t3BT9wa5vlS334dGUGRyQNm3a0KuTD-bs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/spring/cpu-intensive/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"spring",
+								"cpu-intensive",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "nodejs",
+			"item": [
+				{
+					"name": "nodejs-login",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjEyMTA2NDYzLCJleHAiOjE2MTIxMDgyNjN9.crfgrcDKshkYtAEqvOx0juyMtnK5WvpsCu4c2uH8rAM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\" : \"username\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/nodejs/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"nodejs",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "nodejs-getBooks",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJuYW1lIiwiaWF0IjoxNjEzMzk5MDU0LCJleHAiOjE2MTM0MDA4NTR9.Eklg6PICdhIUcn0tzovEJnCIGuDaC14r--pBJzxpxsc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/nodejs/books/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"nodejs",
+								"books",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "nodejs-getBook",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJuYW1lIiwiaWF0IjoxNjEzMzk3MTQxLCJleHAiOjE2MTMzOTg5NDF9.eMk344I9rPa945mFFuPq4erEl9OAil8bub6ho5ngtU0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/nodejs/books/12345678920",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"nodejs",
+								"books",
+								"12345678920"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "nodejs-postBook",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ0YSIsInN1YiI6InRhIiwidXNlcm5hbWUiOiJ1c2VybmFtZSIsImlhdCI6MTYxMzM5NTk0MiwiZXhwIjoxNjEzMzk3NzQyfQ.ZLQbXyC3X4t3BT9wa5vlS334dGUGRyQNm3a0KuTD-bs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"ciaobello\",\n    \"author\": \"tanino\",\n    \"isbn\": \"12345678920\",\n    \"year\" : \"2000\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/spring/books/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"spring",
+								"books",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "nodejs-cpuIntensive",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ0YSIsInN1YiI6InRhIiwidXNlcm5hbWUiOiJ1c2VybmFtZSIsImlhdCI6MTYxMzM5NTk0MiwiZXhwIjoxNjEzMzk3NzQyfQ.ZLQbXyC3X4t3BT9wa5vlS334dGUGRyQNm3a0KuTD-bs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/spring/cpu-intensive/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"spring",
+								"cpu-intensive",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
