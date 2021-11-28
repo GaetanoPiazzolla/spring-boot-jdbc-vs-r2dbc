@@ -13,7 +13,7 @@ public class Order {
 
     @Id
     @Column("order_id")
-    private Integer orderId;
+    private Long orderId;
 
     @Column("quantity")
     private Integer quantity;

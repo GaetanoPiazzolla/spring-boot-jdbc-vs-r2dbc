@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 @Data
 public class BookDTO {
 
-    private Integer bookId;
+    private Long bookId;
 
     @Size(min = 5)
     private String author;

@@ -4,4 +4,4 @@ spring:
     password: postgres
     url: r2dbc:postgresql://localhost:5432/postgres
     properties:
-      schema: librarygi
+      schema: library
