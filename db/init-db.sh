@@ -42,5 +42,9 @@ CREATE TABLE library.orders
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 );
-	
+
+insert into "library".users(first_name, last_name) values ('Gaetano','Piazzolla')
+
+insert into "library".books (title,author,isbn,"year") values('MediumPubblication','Me',11111111,2021);
+
 EOSQL

@@ -21,7 +21,7 @@ import reactor.core.publisher.Mono;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/orders/")
+@RequestMapping("/orders")
 @Slf4j
 public class OrderController {
 
@@ -37,24 +37,26 @@ public class OrderController {
     @Autowired
     private OrderMapper orderMapper;
 
-    @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Transactional
     public Mono<OrderDTO> addOrder(@RequestParam("bookIsbn") String bookIsbn, @RequestParam("firstName") String firstName) {
-        return Mono.just(UUID.randomUUID()).flatMap(uid -> {
-            log.info("addOrder() {} running", uid);
+        return Mono.just(UUID.randomUUID()).flatMap(uuid -> {
+            log.info("addOrder() {} running", uuid);
 
             Mono<User> user = userRepository.findByFirstName(firstName);
             Mono<Book> book = bookRepository.findByIsbn(bookIsbn);
 
             return Mono.zip(user, book).flatMap(zipFlux -> {
-                        log.info("addOrder() {} I've got user and book", uid);
+                        log.info("addOrder() {} I've got user and book", uuid);
                         Order order = new Order();
                         order.setUserId(zipFlux.getT1().getUserId());
                         order.setBookId(zipFlux.getT2().getBookId());
                         order.setQuantity(1);
                         return orderRepository.save(order).map(orderMapper::toDto);
                     }
-            );
+            ).doFinally((s) -> {
+                log.info("addOrder() {} executed", uuid);
+            });
 
         });
     }

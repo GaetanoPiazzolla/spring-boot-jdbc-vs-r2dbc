@@ -14,7 +14,7 @@ import reactor.core.publisher.Mono;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/books/")
+@RequestMapping("/books")
 @Slf4j
 public class BookController {
 
@@ -24,35 +24,40 @@ public class BookController {
     @Autowired
     private BookMapper mapper;
 
-    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public Flux<BookDTO> getAll() {
-        return Flux.just(UUID.randomUUID()).flatMap(uid -> {
-            log.info("getAll() {} running", uid);
+        return Flux.just(UUID.randomUUID()).flatMap(uuid -> {
+            log.info("getAll() {} running", uuid);
             return this.bookRepository.findAll().
                     map(mapper::toDto).doFinally((a) -> {
-                        log.info("getAll() {} executed", uid);
+                        log.info("getAll() {} executed", uuid);
                     });
         });
     }
 
-    @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @Transactional
     public Mono<BookDTO> saveBook(@RequestBody BookDTO dto) {
-        return Mono.just(UUID.randomUUID()).flatMap(uid -> {
-            log.info("saveBook() {} running", uid);
+        return Mono.just(UUID.randomUUID()).flatMap(uuid -> {
+            log.info("saveBook() {} running", uuid);
             return this.bookRepository.save(mapper.toEntity(dto))
                     .map(mapper::toDto).doFinally((s) -> {
-                        log.info("saveBook() {} ", uid);
+                        log.info("saveBook() {} executed", uuid);
                     });
         });
     }
 
-    @PutMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @Transactional
-    public Mono<BookDTO> update(@RequestBody BookDTO dto) {
-        return this.bookRepository.findByIsbn(dto.getIsbn()).flatMap(b -> {
-            b.setAuthor(dto.getAuthor());
-            return this.bookRepository.save(b).map(mapper::toDto);
+    public Mono<BookDTO> updateBook(@RequestBody BookDTO dto) {
+        return Mono.just(UUID.randomUUID()).flatMap(uuid -> {
+            log.info("updateBook() {} running", uuid);
+            return this.bookRepository.findByIsbn(dto.getIsbn()).flatMap(b -> {
+                b.setAuthor(dto.getAuthor());
+                return this.bookRepository.save(b).map(mapper::toDto).doFinally((s) -> {
+                    log.info("updateBook() {} executed", uuid);
+                });
+            });
         });
     }
 

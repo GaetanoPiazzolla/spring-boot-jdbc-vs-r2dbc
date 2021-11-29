@@ -8,8 +8,11 @@ const getErrorRate = new Rate('Get Books error');
 const postTrend = new Trend('Add Book');
 const postErrorRate = new Rate('Add Book error');
 
+const orderTrend = new Trend('Add Order');
+const orderErrorRate = new Rate('Add Order error');
+
 export default function () {
-  const url = 'http://localhost:8080/books/'
+  const url = 'http://localhost:8080/'
 
   const params = {
     headers: {
@@ -17,7 +20,7 @@ export default function () {
     },
   };
 
-  const body = JSON.stringify({
+  const addBookBody = JSON.stringify({
       author: `Author Name ${__ITER}`,
       isbn: `${__VU}`,
       title: `always the same title`,
@@ -27,20 +30,27 @@ export default function () {
   const requests = {
       'Get Books': {
         method: 'GET',
-        url: url,
+        url: url +'books',
         params: params,
       },
       'Add Book': {
         method: 'POST',
-        url: url,
+        url: url+'books',
         params: params,
-        body: body,
+        body: addBookBody,
       },
+      'Add Order': {
+        method: 'POST',
+        url: url + 'orders?bookIsbn=11111111&firstName=Gaetano',
+        params: params,
+        body: null
+      }
     };
 
   const responses = http.batch(requests);
   const getResp = responses['Get Books'];
   const postResp = responses['Add Book'];
+  const addOrderResp = responses['Add Order'];
 
   check(getResp, {
     'status is 200': (r) => r.status === 200,
@@ -54,4 +64,9 @@ export default function () {
 
   postTrend.add(postResp.timings.duration);
 
+  check(addOrderResp, {
+    'status is 200': (r) => r.status === 200,
+  }) || orderErrorRate.add(1);
+
+  orderTrend.add(addOrderResp.timings.duration);
 }

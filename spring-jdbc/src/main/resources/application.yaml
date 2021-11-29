@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    username: postgres
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=library #db-service instead of localhost
+    platform: postgres
+    password: postgres
+  jpa:
+    generate-ddl: 'false'
+    database: POSTGRESQL
+    properties:
+      hibernate:
+        default_schema: library
+    show-sql: 'false'
+    hibernate:
+      ddl-auto: validate
+server:
+  port: '8080'
