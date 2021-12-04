@@ -1,9 +1,12 @@
 spring:
   datasource:
     username: postgres
-    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=library #db-service instead of localhost
+    url: jdbc:postgresql://db-service:5432/postgres?currentSchema=library #db-service | localhost
     platform: postgres
     password: postgres
+    hikari:
+      maximumPoolSize: 20
+
   jpa:
     generate-ddl: 'false'
     database: POSTGRESQL

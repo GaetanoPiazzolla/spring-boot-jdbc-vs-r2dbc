@@ -10,7 +10,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "books")
-@NamedQuery(name = "Book.findAll", query = "SELECT b FROM Book b")
 @Getter
 @Setter
 public class Book implements Serializable {
@@ -18,6 +17,7 @@ public class Book implements Serializable {
 
     @Id
     @Column(name = "book_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer bookId;
 
     private String author;

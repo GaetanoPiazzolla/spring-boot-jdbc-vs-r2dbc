@@ -8,7 +8,6 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "orders")
-@NamedQuery(name = "Order.findAll", query = "SELECT o FROM Order o")
 @Getter
 @Setter
 public class Order implements Serializable {
@@ -16,15 +15,16 @@ public class Order implements Serializable {
 
     @Id
     @Column(name = "order_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer orderId;
 
     private Integer quantity;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "book_id")
     private Book book;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_id")
     private User user;
 

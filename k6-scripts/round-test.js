@@ -11,8 +11,16 @@ const postErrorRate = new Rate('Add Book error');
 const orderTrend = new Trend('Add Order');
 const orderErrorRate = new Rate('Add Order error');
 
+export let options = {
+  stages: [
+      { duration: "10s", target: 30 },
+      { duration: "40s", target: 30 },
+      { duration: "10s", target: 0 }
+  ]
+};
+
 export default function () {
-  const url = 'http://localhost:8080/'
+  const url = 'http://nginx:4000/spring-r2dbc/'
 
   const params = {
     headers: {

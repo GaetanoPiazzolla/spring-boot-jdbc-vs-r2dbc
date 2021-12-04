@@ -2,8 +2,6 @@ package gae.piaz.performance.repository;
 
 import gae.piaz.performance.domain.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -12,7 +10,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BookRepository extends JpaRepository<Book, Integer> {
 
-    @Query("select b from Book b where b.isbn = :isbn")
-    Book findByIsbn(@Param("isbn") String parameter);
+    Book findByIsbn(String isbn);
 
 }

@@ -2,6 +2,11 @@ spring:
   r2dbc:
     username: postgres
     password: postgres
-    url: r2dbc:postgresql://localhost:5432/postgres
+    url: r2dbc:postgresql://db-service:5432/postgres #db-service | localhost
     properties:
       schema: library
+    pool:
+      name: TEST-POOL
+      initial-size: 100
+      max-size: 100
+      max-idle-time: 30m

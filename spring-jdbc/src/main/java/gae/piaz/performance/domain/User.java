@@ -7,10 +7,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
-
 @Entity
 @Table(name = "users")
-@NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
 @Getter
 @Setter
 public class User implements Serializable {
@@ -18,6 +16,7 @@ public class User implements Serializable {
 
     @Id
     @Column(name = "user_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
 
     @Column(name = "first_name")

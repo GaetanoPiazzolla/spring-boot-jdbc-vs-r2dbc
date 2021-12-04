@@ -12,20 +12,22 @@ services:
     ports:
       - "5000:5432"
     deploy:
+      replicas: 1
       resources:
         limits:
           cpus: 1
           memory: 250M
         reservations:
           memory: 250M
-    
+
   nginx:
+    container_name: nginx
     image: nginx:latest
     volumes:
       - ../nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
-      - spring-boot
-      - node-js
+      - spring-jdbc
+      - spring-r2dbc
     ports:
       - "4000:4000"
     restart: always
@@ -37,25 +39,73 @@ services:
           memory: 250M
         reservations:
           memory: 250M
-          
-  #############################
-  
-  spring-boot:
-    build: 
-        context: ../spring-boot-performance
-    depends_on: 
+
+  ##########################################################
+
+  spring-jdbc:
+    container_name: spring-jdbc
+    build:
+      context: ../spring-jdbc
+    depends_on:
       - db-service
-    expose:
-      - "8080"
+    ports:
+      - "8222:8080"
     restart: always
-    
-          
-  node-js:
-    build: 
-        context: ../nodejs-performance
-    depends_on: 
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: 1
+          memory: 2G
+        reservations:
+          memory: 2G
+
+  spring-r2dbc:
+    container_name: spring-r2dbc
+    build:
+      context: ../spring-r2dbc
+    depends_on:
       - db-service
-    expose:
-      - "8080"
+    ports:
+      - "8111:8080"
     restart: always
-    
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: 1
+          memory: 2G
+        reservations:
+          memory: 2G
+
+  ########################################
+
+  influxdb:
+    image: influxdb:1.8
+    ports:
+      - "8086:8086"
+    environment:
+      - INFLUXDB_DB=k6
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_BASIC_ENABLED=false
+      - GF_SERVER_SERVE_FROM_SUB_PATH=true
+    volumes:
+      - ../grafana/dashboards:/var/lib/grafana/dashboards
+      - ../grafana/grafana-dashboard.yaml:/etc/grafana/provisioning/dashboards/dashboard.yaml
+      - ../grafana/grafana-datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml
+
+  k6:
+    image: loadimpact/k6:latest
+    ports:
+      - "6565:6565"
+    environment:
+      - K6_OUT=influxdb=http://influxdb:8086/k6
+    volumes:
+      - ../k6-scripts:/k6-scripts
