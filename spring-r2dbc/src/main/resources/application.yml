@@ -7,6 +7,6 @@ spring:
       schema: library
     pool:
       name: TEST-POOL
-      initial-size: 100
-      max-size: 100
+      initial-size: ${POOL_SIZE}
+      max-size: ${POOL_SIZE}
       max-idle-time: 30m

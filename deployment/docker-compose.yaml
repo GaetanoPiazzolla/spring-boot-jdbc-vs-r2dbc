@@ -33,54 +33,9 @@ services:
     restart: always
     deploy:
       replicas: 1
-      resources:
-        limits:
-          cpus: 1
-          memory: 250M
-        reservations:
-          memory: 250M
-
-  ##########################################################
-
-  spring-jdbc:
-    container_name: spring-jdbc
-    build:
-      context: ../spring-jdbc
-    depends_on:
-      - db-service
-    ports:
-      - "8222:8080"
-    restart: always
-    deploy:
-      replicas: 1
-      resources:
-        limits:
-          cpus: 1
-          memory: 2G
-        reservations:
-          memory: 2G
-
-  spring-r2dbc:
-    container_name: spring-r2dbc
-    build:
-      context: ../spring-r2dbc
-    depends_on:
-      - db-service
-    ports:
-      - "8111:8080"
-    restart: always
-    deploy:
-      replicas: 1
-      resources:
-        limits:
-          cpus: 1
-          memory: 2G
-        reservations:
-          memory: 2G
-
-  ########################################
 
   influxdb:
+    container_name: influxdb
     image: influxdb:1.8
     ports:
       - "8086:8086"
@@ -88,6 +43,7 @@ services:
       - INFLUXDB_DB=k6
 
   grafana:
+    container_name: grafana
     image: grafana/grafana:latest
     ports:
       - "3000:3000"
@@ -102,6 +58,7 @@ services:
       - ../grafana/grafana-datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml
 
   k6:
+    container_name: k6
     image: loadimpact/k6:latest
     ports:
       - "6565:6565"
@@ -109,3 +66,37 @@ services:
       - K6_OUT=influxdb=http://influxdb:8086/k6
     volumes:
       - ../k6-scripts:/k6-scripts
+
+  spring-jdbc:
+    build:
+      context: ../spring-jdbc
+    depends_on:
+      - db-service
+    restart: always
+    environment:
+      - POOL_SIZE=20
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: 2
+          memory: 2G
+        reservations:
+          memory: 2G
+
+  spring-r2dbc:
+    build:
+      context: ../spring-r2dbc
+    depends_on:
+      - db-service
+    restart: always
+    environment:
+      - POOL_SIZE=20
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: 2
+          memory: 2G
+        reservations:
+          memory: 2G

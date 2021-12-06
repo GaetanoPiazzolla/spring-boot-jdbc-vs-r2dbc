@@ -13,14 +13,14 @@ const orderErrorRate = new Rate('Add Order error');
 
 export let options = {
   stages: [
-      { duration: "10s", target: 30 },
-      { duration: "40s", target: 30 },
+      { duration: "10s", target: `${__ENV.USERS}` },
+      { duration: "100s", target: `${__ENV.USERS}` },
       { duration: "10s", target: 0 }
   ]
 };
 
 export default function () {
-  const url = 'http://nginx:4000/spring-r2dbc/'
+  const url = `http://nginx:4000/spring-${__ENV.TYPE}/`
 
   const params = {
     headers: {

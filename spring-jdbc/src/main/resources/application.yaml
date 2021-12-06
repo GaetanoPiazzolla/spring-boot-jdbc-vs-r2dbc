@@ -1,11 +1,15 @@
 spring:
+
   datasource:
     username: postgres
-    url: jdbc:postgresql://db-service:5432/postgres?currentSchema=library #db-service | localhost
+    url: jdbc:postgresql://db-service:5432/postgres?currentSchema=library
     platform: postgres
     password: postgres
     hikari:
-      maximumPoolSize: 20
+      maximumPoolSize: ${POOL_SIZE}
+      minimum-idle: ${POOL_SIZE}
+      poolName: TEST-POOL
+      idleTimeout: 1800000
 
   jpa:
     generate-ddl: 'false'
@@ -15,6 +19,28 @@ spring:
         default_schema: library
     show-sql: 'false'
     hibernate:
-      ddl-auto: validate
+      ddl-auto: none
+
 server:
   port: '8080'
+  tomcat:
+    mbeanregistry:
+      enabled: 'true'
+
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: health, info, metrics
+  metrics:
+    export:
+      influx:
+        uri: http://influxdb:8086
+        enabled: 'true'
+        db: influxdb
+        connect-timeout: 3s
+        step: 1m
+        user-name: influxdb
+        password: influxdb
+
