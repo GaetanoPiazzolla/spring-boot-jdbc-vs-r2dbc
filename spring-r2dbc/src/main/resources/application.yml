@@ -2,7 +2,7 @@ spring:
   r2dbc:
     username: postgres
     password: postgres
-    url: r2dbc:postgresql://db-service:5432/postgres #db-service | localhost
+    url: r2dbc:postgresql://db-service:5432/postgres
     properties:
       schema: library
     pool:
@@ -10,3 +10,24 @@ spring:
       initial-size: ${POOL_SIZE}
       max-size: ${POOL_SIZE}
       max-idle-time: 30m
+
+server:
+  port: '8080'
+  tomcat:
+    mbeanregistry:
+      enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  metrics:
+    tags:
+      application: spring-r2dbc
+    export:
+      influx:
+        db: k6
+        uri: http://influxdb:8086
+        step: 15s
+        autoCreateDb: false

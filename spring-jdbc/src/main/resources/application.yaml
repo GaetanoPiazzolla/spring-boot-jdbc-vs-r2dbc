@@ -25,22 +25,19 @@ server:
   port: '8080'
   tomcat:
     mbeanregistry:
-      enabled: 'true'
+      enabled: true
 
 management:
   endpoints:
     web:
-      base-path: /actuator
       exposure:
-        include: health, info, metrics
+        include: '*'
   metrics:
+    tags:
+      application: spring-jdbc
     export:
       influx:
+        db: k6
         uri: http://influxdb:8086
-        enabled: 'true'
-        db: influxdb
-        connect-timeout: 3s
-        step: 1m
-        user-name: influxdb
-        password: influxdb
-
+        step: 15s
+        autoCreateDb: false
