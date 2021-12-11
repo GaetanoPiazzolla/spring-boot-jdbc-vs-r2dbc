@@ -75,6 +75,8 @@ services:
     restart: always
     environment:
       - POOL_SIZE=20
+    ports:
+      - "8080:8080"
     deploy:
       replicas: 1
       resources:
@@ -92,6 +94,8 @@ services:
     restart: always
     environment:
       - POOL_SIZE=20
+    ports:
+      - "8081:8080"
     deploy:
       replicas: 1
       resources:

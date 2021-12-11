@@ -1,5 +1,6 @@
 package gae.piaz.rest;
 
+import gae.piaz.domain.Book;
 import gae.piaz.domain.dto.BookDTO;
 import gae.piaz.repository.BookRepository;
 import gae.piaz.service.BookMapper;
@@ -33,6 +34,11 @@ public class BookController {
                         log.info("getAll() {} executed", uuid);
                     });
         });
+    }
+
+    @GetMapping(value = "/simple", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Flux<Book> getAllSimple() {
+        return this.bookRepository.findAll();
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)

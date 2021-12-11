@@ -19,7 +19,7 @@ Run tests with:
 docker-compose run --rm k6 run /k6-scripts/load-test.js -e TYPE=jdbc -e USERS=20
 ```
 
-Before each test you should run the following script to make every load test indipendent from the previous executions.
+Before each test you should run the following script to make every load test independent of the previous executions.
 
 ```sql
 delete from books b where b.book_id <> 1;

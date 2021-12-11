@@ -1,7 +1,7 @@
 package gae.piaz.performance.rest;
 
-import gae.piaz.performance.domain.dto.BookDTO;
 import gae.piaz.performance.domain.Book;
+import gae.piaz.performance.domain.dto.BookDTO;
 import gae.piaz.performance.repository.BookRepository;
 import gae.piaz.performance.service.BookMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -39,6 +39,11 @@ public class BookController {
 
         log.info("getAll() {} executed", uuid);
         return list;
+    }
+
+    @GetMapping(value = "/simple", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Book>> getAllSimple() {
+        return ResponseEntity.ok(this.bookRepository.findAll());
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)

@@ -28,7 +28,4 @@ public class Book implements Serializable {
 
     private Integer year;
 
-    @OneToMany(mappedBy = "book")
-    private List<Order> orders;
-
 }
