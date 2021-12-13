@@ -10,7 +10,7 @@
 ### Output:
 Simple GET Iterations 
 
-    docker-compose run --rm k6 run /k6-scripts/get-test.js -e USERS=500 -e TYPE=r2dbc
+    docker-compose run --rm k6 run /k6-scripts/get-test.js -e USERS=500|250 -e TYPE=r2dbc|jdbc
 
 Containerized k6 (1)
 
@@ -38,7 +38,3 @@ Now the question is this:
 Are there lots of applications which needs more than 1500 database rows at once, 
 having more than 500 users ? considering also that pagination is an option, the response is NO. 
 R2DBC is not a good choice for the overwhelming majority of web application. 
-
-- K6 uses less resources than jmeter - jmeter is way easier to use with that ugly interface - from now on I'll be using only K6 )
-- Does passing through the nginx change results ? NO
-- Does Jmeter have different results of K6 ? NO
