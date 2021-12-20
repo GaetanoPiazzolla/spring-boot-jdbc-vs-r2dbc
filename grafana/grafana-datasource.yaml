@@ -7,3 +7,7 @@ datasources:
     database: k6
     url: http://influxdb:8086
     isDefault: true
+  - name: prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090

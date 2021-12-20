@@ -8,7 +8,7 @@ spring:
     hikari:
       maximumPoolSize: ${POOL_SIZE}
       minimum-idle: ${POOL_SIZE}
-      poolName: TEST-POOL
+      poolName: jdbc-pool
       idleTimeout: 1800000
 
   jpa:
@@ -31,13 +31,9 @@ management:
   endpoints:
     web:
       exposure:
-        include: '*'
+        include: prometheus
+    health:
+      show-details: always
   metrics:
     tags:
       application: spring-jdbc
-    export:
-      influx:
-        db: k6
-        uri: http://influxdb:8086
-        step: 15s
-        autoCreateDb: false

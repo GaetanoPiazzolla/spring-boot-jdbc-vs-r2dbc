@@ -6,7 +6,7 @@ spring:
     properties:
       schema: library
     pool:
-      name: TEST-POOL
+      name: r2dbc-pool
       initial-size: ${POOL_SIZE}
       max-size: ${POOL_SIZE}
       max-idle-time: 30m
@@ -21,13 +21,9 @@ management:
   endpoints:
     web:
       exposure:
-        include: '*'
+        include: prometheus
+    health:
+      show-details: always
   metrics:
     tags:
       application: spring-r2dbc
-    export:
-      influx:
-        db: k6
-        uri: http://influxdb:8086
-        step: 15s
-        autoCreateDb: false

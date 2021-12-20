@@ -9,8 +9,7 @@ Initialize with:
 
 ```shell
 docker-compose rm -f
-docker-compose pull
-docker-compose up --build --force-recreate --remove-orphans db-service nginx spring-jdbc spring-r2dbc influxdb grafana 
+docker-compose up --build --force-recreate --remove-orphans 
 ```
 
 Run tests with:
