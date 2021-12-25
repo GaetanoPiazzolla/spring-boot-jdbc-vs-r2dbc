@@ -1,4 +1,8 @@
-version: '3.1'
+version: '3.5'
+
+networks:
+  default:
+    name: load-testing-network
 
 services:
 
@@ -23,7 +27,7 @@ services:
       replicas: 1
       resources:
         limits:
-          cpus: 1
+          cpus: '1'
           memory: 250M
         reservations:
           memory: 250M
@@ -79,7 +83,7 @@ services:
       replicas: 1
       resources:
         limits:
-          cpus: 2
+          cpus: '3'
           memory: 2G
         reservations:
           memory: 2G
@@ -98,7 +102,7 @@ services:
       replicas: 1
       resources:
         limits:
-          cpus: 2
+          cpus: '3'
           memory: 2G
         reservations:
           memory: 2G

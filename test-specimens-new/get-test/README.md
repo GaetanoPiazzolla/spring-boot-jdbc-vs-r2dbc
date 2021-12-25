@@ -1,4 +1,4 @@
-### Input:
+## Specimen 1:
 - Concurrency: 500 / 250 / 100 / 10
 - Items retrieved: 6000 / 3000 / 1500
 - Containers: 1
@@ -44,7 +44,7 @@ Full reactive stack is not a good choice for the overwhelming majority of databa
 https://www.reddit.com/r/java/comments/k9ozz9/are_you_using_r2dbc_in_production/.
 
 -- Case 500 users and 1.5 k rows -- 
-![](img.png)
+![](jdbc-r2dbc-500 users .png)
 
 In addition:
 - It's still impossible to use Hibernate
