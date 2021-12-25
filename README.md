@@ -5,7 +5,7 @@ and a spring web-flux application wich uses R2DBC reactive drivers.
 
 The experimental results I've found have been published in the following medium article for you to consider.
 
-LINKKKKKKKK
+https://link.medium.com/CzFp1qZKhmb
 
 Please consider that all this code is published under the GNU General Public License v3.0 and it's free for you to use and customize as you wish.
 
