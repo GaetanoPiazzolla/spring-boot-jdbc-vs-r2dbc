@@ -9,7 +9,7 @@ LINKKKKKKKK
 
 Please consider that all this code is published under the GNU General Public License v3.0 and it's free for you to use and customize as you wish.
 
-![](img/load test.png)
+![](img/load_test.png)
 
 ### Step 1:
 Run the containers by executing the following command inside the "deployment" folder:
